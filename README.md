@@ -1,42 +1,42 @@
-# ML Project Phase 3 - Food Price Crisis Prediction
+ ML Project Phase 3 - Food Price Crisis Prediction
 
-**Name:** Jawad Ali
-**Roll Number:** BCSF23M541
-**Dataset:** Global Food Price Inflation
-**Kaggle:** https://www.kaggle.com/code/bcsf23m541jawadali/csf23m-ml-project-phase3-food-price-crisis-predict
+Name: Jawad Ali
+Roll Number: BCSF23M541
+Dataset: Global Food Price Inflation
+Kaggle: https://www.kaggle.com/code/bcsf23m541jawadali/csf23m-ml-project-phase3-food-price-crisis-predict
 
 ---
 
-## What This Phase Covers
+ What This Phase Covers
 
 Phase 3 is about feature engineering. The goal was to find which features matter, build new ones, and check if they improve the model.
 
 ---
 
-## Dataset
+ Dataset
 
-- **Rows:** 4434
-- **Target column:** `crisis_next_3m` (binary - will there be a food crisis in the next 3 months)
-- **Input:** Preprocessed CSV from Phase 2
+- Rows: 4434
+- Target column: `crisis_next_3m` (binary - will there be a food crisis in the next 3 months)
+- Input: Preprocessed CSV from Phase 2
 
 ---
 
-## Steps Done
+ Steps Done
 
-### 1. Feature Importance - 5 Methods
+ 1. Feature Importance - 5 Methods
 
-- **Random Forest** - FCAI and Inflation came out on top
-- **Gradient Boosting** - FCAI dominated heavily (0.79 importance score)
-- **Extra Trees** - More balanced, lag features ranked higher here
-- **SHAP** - Most reliable method; confirmed FCAI and Inflation as top 2
-- **Permutation Importance** - Tested by shuffling features and measuring AUC drop
-- **LIME** - Used for one sample to explain a single prediction locally
+- Random Forest - FCAI and Inflation came out on top
+- Gradient Boosting - FCAI dominated heavily (0.79 importance score)
+- Extra Trees - More balanced, lag features ranked higher here
+- SHAP - Most reliable method; confirmed FCAI and Inflation as top 2
+- Permutation Importance - Tested by shuffling features and measuring AUC drop
+- LIME - Used for one sample to explain a single prediction locally
 
 Combined all 5 into a rank aggregation table. Top features: FCAI, Inflation, rolling_avg_3m, lag_2
 
 ---
 
-### 2. New Features Created (10 total)
+ 2. New Features Created (10 total)
 
 | Feature | Why |
 |---|---|
@@ -53,7 +53,7 @@ Combined all 5 into a rank aggregation table. Top features: FCAI, Inflation, rol
 
 ---
 
-### 3. LightGBM Validation (default settings)
+ 3. LightGBM Validation (default settings)
 
 | Model | Features | ROC-AUC |
 |---|---|---|
@@ -64,13 +64,13 @@ Combined all 5 into a rank aggregation table. Top features: FCAI, Inflation, rol
 
 ---
 
-### 4. Dropped Features
+ 4. Dropped Features
 
 Bottom 20% by LightGBM importance removed: number_of_markets_modeled, number_of_markets_covered, number_of_food_items, data_coverage_food, average_annualized_food_inflation, average_annualized_food_volatility, index_confidence_score, market_coverage_ratio
 
 ---
 
-### 5. KMeans Cluster Feature
+ 5. KMeans Cluster Feature
 
 4 clusters. Cluster 3 had 100% crisis rate - every single row in it was a food crisis.
 
@@ -83,7 +83,7 @@ Bottom 20% by LightGBM importance removed: number_of_markets_modeled, number_of_
 
 ---
 
-## Files
+ Files
 
 | File | Description |
 |---|---|
